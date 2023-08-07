@@ -59,12 +59,16 @@ console.log(dataPersonaFilter);
 //-----
 
 
+const promedio = ()=>{
+    let suma =0;
+    dataPersona.forEach((person)=>{
+        suma += person.birthday;
+    });
 
-let total = 0;
+let prom = suma/ dataPersona.length;
+return prom;
+}
 
-dataPersona.map(({birthday}) => total+=birthday)
 
-const promedio = total / dataPersona.length;
-
-console.log("El promedio de las edades es", promedio);
+console.log(promedio());
 
