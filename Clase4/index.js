@@ -47,9 +47,11 @@ addDataPersona("Martina", "Ardanaz", 14, "CABA", 5, true);
 console.table(dataPersona);
 
 
-let name = prompt("Filtrar por: ");
-let dataPersonaFilter = dataPersona.filter((element) => {
-    return element.firstName == name;
+let words = prompt("Filtrar por: ");
+let dataPersonaFilter = dataPersona.filter((person) => {
+    words = words.trim().toLowerCase();
+    let firstName = person.firstName.toLowerCase();
+    return firstName.includes(words);
 })
 
 console.log(dataPersonaFilter);
