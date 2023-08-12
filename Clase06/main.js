@@ -30,6 +30,8 @@ const addFormPerson = () => {
         dni.focus();
         document.getElementById("listPerson").innerHTML = listPerson(dataPersona);
         messageAlert("Datos Guardados");
+        document.getElementById("botonAgregar").innerHTML = "Agregar";
+
     }
     else {
         dni.focus();
@@ -70,7 +72,8 @@ const listPerson = (dataArray) => {
                     <td>${person.birthday}</td>
                     <td>${person.address}</td>
                     <td>${person.status}</td>
-                    <td><button type="button" onclick="deleteRegisterPerson(${person.dni})" class="btn btn-danger">ELIMINAR</button></td>
+                    <td><button type="button" onclick="editRegisterPerson(${person.dni})" class="btn btn-warning">EDITAR</button>
+                    <button type="button" onclick="deleteRegisterPerson(${person.dni})" class="btn btn-danger">ELIMINAR</button></td>
                     </tr>`;
         });
     }
@@ -104,12 +107,6 @@ const filteDataPerson = (search) => {
     });
 }
 
-const deleteRegisterPerson = (dni) => {
-    let position = findDniOne(dni);
-    dataPersona.splice(position, 1);
-    document.getElementById("listPerson").innerHTML = listPerson(dataPersona);
-}
-
 const messageAlert = (title, icon = 'success') => {
     Swal.fire({
         position: 'center',
@@ -119,6 +116,31 @@ const messageAlert = (title, icon = 'success') => {
         timer: 900
     })
 }
+
+const deleteRegisterPerson = (dni) => {
+    let position = findDniOne(dni);
+    dataPersona.splice(position, 1);
+    document.getElementById("listPerson").innerHTML = listPerson(dataPersona);
+
+}
+
+
+
+const editRegisterPerson = (person, dni) => {
+    let position = findDniOne(dni);
+
+    document.getElementById("dni").value = `${person.dni}`;
+    document.getElementById("fistName").value = `${person.firstName}`;
+    document.getElementById("lastName").value = `${person.lastName}`;
+    document.getElementById("birthday").value = `${person.birthday}`;
+    document.getElementById("address").value = `${person.address}`;
+    document.getElementById("status").value = `${person.status}`;
+
+    document.getElementById("botonAgregar").innerHTML = "Guardar";
+    document.getElementById("listPerson").innerHTML = listPerson(dataPersona);
+}
+
+
 
 /** 1.- agregar el boton de editar la data
  * 2.- hacer el guardado de la data
