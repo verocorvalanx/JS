@@ -1,4 +1,7 @@
 let dataPersona = [];
+var indexPersonUpdate = 0;
+
+ 
 const addDataPersona = (firstName, lastName, birthday, address, status, dni, condition = true) => {
     let person = {
         dni,
@@ -28,10 +31,9 @@ const addFormPerson = () => {
         addDataPersona(firstName.value, lastName.value, birthday.value, address.value, status.value, dni.value);
         document.getElementById("formPerson").reset();
         dni.focus();
+        addStorageItems();
         document.getElementById("listPerson").innerHTML = listPerson(dataPersona);
         messageAlert("Datos Guardados");
-        document.getElementById("botonAgregar").innerHTML = "Agregar";
-
     }
     else {
         dni.focus();
@@ -41,39 +43,19 @@ const addFormPerson = () => {
 
 
 
-/*
-    if (firstName.value.trim() === "" || lastName.value.trim() === "" || birthday.value.trim() === "" || address.value.trim() === "" || status.value.trim() === "" || dni.value.trim() === "") {
-        Swal.fire({
-            icon: 'warning',
-            title: 'Ups...',
-            text: 'Complete todos los campos.',
-
-        })
-    } else {
-        addDataPersona(firstName.value, lastName.value, birthday.value, address.value, status.value, dni.value);
-        document.getElementById("formPersona").reset();
-        messageAlert("Datos Guardados");
-        firstName.focus();
-        console.table(dataPersona);
-
-    }
-
-
-} */
-
-
 const listPerson = (dataArray) => {
     let list = '';
     if (dataArray.length > 0) {
-        dataArray.forEach((person, index) => {
+        dataArray.forEach((person,index) => {
             list += `<tr>
                     <td>${person.dni}</td>
                     <td>${person.firstName} ${person.lastName}</td>
                     <td>${person.birthday}</td>
                     <td>${person.address}</td>
                     <td>${person.status}</td>
-                    <td><button type="button" onclick="editRegisterPerson(${person.dni})" class="btn btn-warning">EDITAR</button>
-                    <button type="button" onclick="deleteRegisterPerson(${person.dni})" class="btn btn-danger">ELIMINAR</button></td>
+                    <td>
+                    <button type="button" onclick="editarRegisterPerson(${person.dni})" class="m-1 btn btn-success">EDITAR</button>
+                    <button type="button" onclick="deleteRegisterPerson(${person.dni})" class="m-1 btn btn-danger">ELIMINAR</button></td>
                     </tr>`;
         });
     }
@@ -107,9 +89,79 @@ const filteDataPerson = (search) => {
     });
 }
 
+const deleteRegisterPerson = (dni) =>{
+    let position = findDniOne(dni);
+    dataPersona.splice(position,1);
+    document.getElementById("listPerson").innerHTML = listPerson(dataPersona);
+    showHiddeTextButton(0);
+    addStorageItems();
+}
+
+const editarRegisterPerson = (dni) =>{
+    let position = findDniOne(dni);
+    let person = dataPersona[position];
+
+    document.getElementById("fistName").value = person.firstName;
+    document.getElementById("lastName").value = person.lastName;
+    document.getElementById("birthday").value = person.birthday;
+    document.getElementById("address").value = person.address;
+    document.getElementById("status").value = person.status;
+    document.getElementById("dni").value = person.dni;
+    document.getElementById("position").value = position;
+    indexPersonUpdate = position;
+    showHiddeTextButton(1);
+ 
+}
+
+const editFormPerson = () =>{
+    let firstName = document.getElementById("fistName");
+    let lastName = document.getElementById("lastName");
+    let birthday = document.getElementById("birthday");
+    let address = document.getElementById("address");
+    let status = document.getElementById("status");
+    let dni = document.getElementById("dni");
+    let position = document.getElementById("position").value;
+
+    if (findDniOne(dni.value) == -1 ||  findDniOne(dni.value) == position ) {
+      
+        dataPersona[position].dni = dni.value;
+        dataPersona[position].firstName = firstName.value;
+        dataPersona[position].lastName = lastName.value;
+        dataPersona[position].birthday = birthday.value;
+        dataPersona[position].address = address.value;
+        dataPersona[position].status = status.value;
+        showHiddeTextButton(2);
+        dni.focus();
+        document.getElementById("listPerson").innerHTML = listPerson(dataPersona);
+        messageAlert("Datos Guardados");
+        
+        addStorageItems();
+    }
+    else {
+        dni.focus();
+        messageAlert("ERROR, EL DNI YA SE ENCUENTRA REGISTRADO", "error");
+    }
+
+}
+
+const showHiddeTextButton =(valor)=>{
+    let formulario =document.getElementById("formPerson");
+    if(valor ==1){
+        formulario.removeAttribute('onsubmit');
+        formulario.setAttribute('onsubmit','event.preventDefault();editFormPerson()')
+        document.getElementById('addButton').textContent = "Editar Datos";
+    }
+    else{
+        document.getElementById('addButton').textContent = "Agregar Datos";
+        formulario.removeAttribute('onsubmit');
+        formulario.setAttribute('onsubmit','event.preventDefault();addFormPerson()');
+        formulario.reset();
+    }
+}
+
 const messageAlert = (title, icon = 'success') => {
     Swal.fire({
-        position: 'center',
+        position: 'top-end',
         icon: icon,
         title: title,
         showConfirmButton: false,
@@ -117,31 +169,22 @@ const messageAlert = (title, icon = 'success') => {
     })
 }
 
-const deleteRegisterPerson = (dni) => {
-    let position = findDniOne(dni);
-    dataPersona.splice(position, 1);
-    document.getElementById("listPerson").innerHTML = listPerson(dataPersona);
-
+const addStorageItems = () =>{
+    
+        localStorage.setItem('listArray',JSON.stringify(dataPersona))
+        sessionStorage.setItem('listArray',JSON.stringify(dataPersona))
 }
 
-
-
-const editRegisterPerson = (person, dni) => {
-    let position = findDniOne(dni);
-
-    document.getElementById("dni").value = `${person.dni}`;
-    document.getElementById("fistName").value = `${person.firstName}`;
-    document.getElementById("lastName").value = `${person.lastName}`;
-    document.getElementById("birthday").value = `${person.birthday}`;
-    document.getElementById("address").value = `${person.address}`;
-    document.getElementById("status").value = `${person.status}`;
-
-    document.getElementById("botonAgregar").innerHTML = "Guardar";
-    document.getElementById("listPerson").innerHTML = listPerson(dataPersona);
+const validateDataArray =()=>{
+    if(localStorage.getItem('listArray')==null){
+        return [];
+    }
+    else{
+        let list = localStorage.getItem('listArray');
+        return JSON.parse(list);
+    }
 }
 
-
-
-/** 1.- agregar el boton de editar la data
- * 2.- hacer el guardado de la data
- */
+dataPersona = validateDataArray();
+console.log(dataPersona);
+document.getElementById("listPerson").innerHTML = listPerson(dataPersona);

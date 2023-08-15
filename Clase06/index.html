@@ -15,7 +15,8 @@
     <div class="container my-4 ">
         <div class="row">
             <div class="col-12 col-md-4">
-                <form id="formPerson" onsubmit="event.preventDefault();addFormPerson()">
+                <form  id="formPerson" onsubmit="event.preventDefault();addFormPerson()">
+                    <input id="position" value="-1" type="hidden">
 
                     <div class="mb-3">
                         <label for="dni">DNI</label>
@@ -46,7 +47,9 @@
                         <input type="text" id="status" class="form-control" required>
                     </div>
                     <div class="mb-3">
-                        <button type="submit" id="botonAgregar" class="btn btn-success">Agregar</button>
+                        <button type="submit" class="btn btn-success" id="addButton">Agregar Datos</button>
+                        <button type="button" onclick="showHiddeTextButton(2)" class="btn btn-danger">Cancelar</button>
+
                     </div>
                 </form>
             </div>
