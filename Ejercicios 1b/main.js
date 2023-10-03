@@ -7,19 +7,19 @@ Si los parámetros no son correctos, la función debe cortar
 su ejecución y devolver un mensaje de error */
 
 /*
-let añoActual = 2023;
+let anioActual = 2023;
 
-const calcularAñosPerro = (nombre, añoDeNacimiento) => {
-    if (typeof añoDeNacimiento !== "number" || typeof nombre !== "string") {
+const calcularAniosPerro = (nombre, anioDeNacimiento) => {
+    if (typeof anioDeNacimiento !== "number" || typeof nombre !== "string") {
         alert("Datos incorrectos");
         return;
     } else {
-        let edadHumana = añoActual - añoDeNacimiento;
-        let añoPerro = edadHumana * 7;
-        alert(`${nombre} tiene ${edadHumana} años de humano y ${añoPerro} años de perro`);
+        let edadHumana = anioActual - anioDeNacimiento;
+        let anioPerro = edadHumana * 7;
+        alert(`${nombre} tiene ${edadHumana} años de humano y ${anioPerro} años de perro`);
     }
 }
-calcularAñosPerro("vero", 1993);
+calcularAniosPerro("vero", 1993);
     
 
 */
@@ -32,7 +32,7 @@ calcularAñosPerro("vero", 1993);
 escribir una función getSquare()
 que guarde en una variable el cuadrado de un número que reciba
 por parámetro
-
+ o return number * number
 */
 /*
 const getSquare = (number) =>{
@@ -74,7 +74,7 @@ let resultado = findInThatThis(friends, 'name', 'Sofía')
 console.log(resultado)
 */
 
-
+/*
 escribí una función returnLongest() que tome como parámetros
 dos strings y retorne el string más largo
 Si ambas strings son igualmente largas, devuelve un mensaje
@@ -84,12 +84,32 @@ Si una de las strings no es válida, devuelve un mensaje
 Si ambos valores son inválidos, devuelve 'None of the values 
 is a string'
 
+*/
+/*
 
+const returnLongest = (stringUno, stringDos) => {
+if (typeof stringUno !== "string" && typeof stringDos !== "string") {
+    alert("None of the values is a string");
+} else if (typeof stringUno !== "string" || typeof stringDos !== "string") {
+    alert("One of the values is not a string");
+} else if (stringUno.length === stringDos.length){
+    alert("they're the same");
+} else if(stringUno.length > stringDos.length){
+    return alert(`El string más largo es ${stringUno}`);
+} else{
+    return alert(`El string más largo es ${stringDos}`);
+}
+}
 
+*/
 
+/*
 escribí una función countVowels() que reciba un string
 y devuelva (decidí vos cómo mostrar el resultado)
 la cantidad de vocales en la palabra
+
+*/
+
 
 
 
