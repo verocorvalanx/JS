@@ -33,6 +33,8 @@ escribir una función getSquare()
 que guarde en una variable el cuadrado de un número que reciba
 por parámetro
  o return number * number
+
+ const resultado = getSquare()
 */
 /*
 const getSquare = (number) =>{
@@ -100,7 +102,9 @@ if (typeof stringUno !== "string" && typeof stringDos !== "string") {
     return alert(`El string más largo es ${stringDos}`);
 }
 }
+ 
 
+returnLongest("hola", "holaaa")
 */
 
 /*
@@ -110,6 +114,19 @@ la cantidad de vocales en la palabra
 
 */
 
+
+const vowels = ["a", "e", "i", "o", "u"];
+
+
+const countVowels = (string) => {
+let count = 0;
+for (let letter of string.toLowerCase()) {
+    if(vowels.includes(letter)) {
+        count++;
+    }
+}
+return alert(`La cantidad de vocales es ${count}`);
+}
 
 
 
