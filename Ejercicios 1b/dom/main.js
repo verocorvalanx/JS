@@ -43,6 +43,6 @@ openButton.onclick = () => {
 
 openButton.onclick = () => {
     let {textContent} = openButton;
-    textContent.trim() === 'Abrir' ? textContent = 'Cerrar' : textContent = 'Abrir'
+    textContent.trim() === 'Abrir' ? openButton.textContent = 'Cerrar' : openButton.textContent = 'Abrir'
     popUp.classList.toggle('closed')
 }
