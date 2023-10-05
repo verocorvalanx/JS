@@ -1,0 +1,17 @@
+:root{
+    margin: 20px;
+}
+button{
+    background-color: darkgreen;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 30px;
+    border: none;
+    margin-top: 15px;
+   
+}
+
+button:hover{
+    background-color: rgb(5, 62, 5);
+}
