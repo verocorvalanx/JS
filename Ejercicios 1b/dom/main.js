@@ -19,9 +19,8 @@ const addParagraphToMain = () => {
 addButton.addEventListener('click', addParagraphToMain)
 
 
-const removeLasElementFromMain = () => {
+
+removeButton.onclick = () => {
     const lastP = main.lastChild
     main.removeChild(lastP)
 }
-
-removeButton.onclick = removeLasElementFromMain;
