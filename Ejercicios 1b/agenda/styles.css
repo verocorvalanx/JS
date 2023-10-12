@@ -26,7 +26,7 @@ form button{
     min-width: 500px;
 }
 
-contacto{
+.contacto{
     border: 3px solid rgb(223, 182, 87);
     border-radius: 5px;
     display: flex;
@@ -42,3 +42,4 @@ contacto{
     font-size: 1rem;
     white-space: nowrap;
 }
+
