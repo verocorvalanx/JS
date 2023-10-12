@@ -1,4 +1,4 @@
-form{
+form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,24 +9,24 @@ form{
     padding: 3rem 0;
 }
 
-form input{
+form input {
     padding: 15px;
     border-radius: 5px;
 }
 
-form button{
+form button {
     margin-top: 2rem;
     padding: .5rem 2rem;
 }
 
-.agenda{
+.agenda {
     border: 3px solid salmon;
     margin: 1rem auto;
     width: 55%;
     min-width: 500px;
 }
 
-.contacto{
+.contacto {
     border: 3px solid rgb(223, 182, 87);
     border-radius: 5px;
     display: flex;
@@ -36,10 +36,10 @@ form button{
     margin: 1rem;
 }
 
-.contacto>span, .contacto>h3{
+.contacto>span,
+.contacto>h3 {
     width: 33.3%;
     text-align: center;
     font-size: 1rem;
     white-space: nowrap;
 }
-
