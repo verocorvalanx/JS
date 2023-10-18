@@ -1,6 +1,40 @@
+
 //a partir del formulario, generar una instancia de la clase
 //Contact, añadirla al final del array, y actualizar el DOM para que
 //esté sincronizado con el array PHONEBOOK
+
+function toast(txt, type) {
+    if (type === 'error') {
+        Toastify({
+            text: txt,
+            duration: 3000,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+                background: "linear-gradient(to right, #e80e0e, #e8910e)",
+                fontFamily: "system-ui, Roboto"
+            },
+        }).showToast();
+    } else {
+        Toastify({
+            text: txt,
+            duration: 3000,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+                background: "linear-gradient(to right, #00b09b, #96c93d)",
+                fontFamily: "system-ui, Roboto"
+            },
+        }).showToast();
+    }
+}
+
+
+
 
 
 class Contact {
@@ -41,7 +75,7 @@ const createContact = (e) => {
 
     //si estan vacios
     if (!name || !tel || !mail) {
-        alert('Hubo un error verificando los datos')
+        toast('Hubo un error verificando los datos', 'error') //toast
     } else {
         let newContact = new Contact(name, tel, mail)
         checkIfContactExists(newContact)
@@ -61,14 +95,15 @@ function checkIfContactExists(obj) {
     //que cumpla con la condición y false si no encuentra ninguno
     if (PHONEBOOK.some((cntct) => cntct.email ===
         obj.email)) {
-        alert('Ya está agendado')
+        toast('Ya está agendado', 'error');
     } else {
 
         // accedo a su método add, el cual lo sabe pushear
-        // a PHONEBOOK
+        // a PHONEBOOK. Enviar al array
         obj.add()
         console.log(obj)
         updateDOM(obj)
+        toast(`Añadí a ${obj.name}`)
     }
 
 }
