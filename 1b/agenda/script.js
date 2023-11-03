@@ -101,15 +101,20 @@ function checkIfContactExists(obj) {
         // accedo a su método add, el cual lo sabe pushear
         // a PHONEBOOK. Enviar al array
         obj.add()
+        //guardar en memoria del navegador
         console.log(obj)
         updateDOM(obj)
+
+
+        localStorage.setItem('PHONEBOOK', PHONEBOOK)
+
         toast(`Añadí a ${obj.name}`)
     }
 
 }
 
 
-
+//editar esta función para que nos sirva para todo el array
 //actualizar el dom
 function updateDOM(obj) {
     //la desestructuracion me permite
@@ -144,3 +149,5 @@ addButton.onclick = (e) => {
 
 
 }
+
+//hacer una función que al iniciar el programa revise el almacenamiento por si hay algo de antes
