@@ -48,17 +48,16 @@ class Contact {
     }
 }
 
-//así phonebook tiene los métodos de array:
+//así phonebook tiene los métod
+//os de array:
 const PHONEBOOK = [];
 
+const STORAGE_KEY = 'PHONEBOOK';
+
 const addButton = document.querySelector('#add-btn');
-
 const nameInput = document.querySelector('#name');
-
 const telInput = document.querySelector('#tel');
-
 const mailInput = document.querySelector('#mail');
-
 const phonebookDOM = document.querySelector('#agenda')
 
 //crear el contacto
@@ -106,7 +105,7 @@ function checkIfContactExists(obj) {
         updateDOM(obj)
 
 
-        localStorage.setItem('PHONEBOOK', PHONEBOOK)
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(PHONEBOOK))
 
         toast(`Añadí a ${obj.name}`)
     }
@@ -120,7 +119,7 @@ function updateDOM(obj) {
     //la desestructuracion me permite
     //guardar el valor de propiedades
     //de un obj en variables del mismo nombre
-    const { name, tel, email } = obj
+    const { name, tel, email } = obj;
 
     let newContact = document.createElement('div')
 
@@ -151,3 +150,30 @@ addButton.onclick = (e) => {
 }
 
 //hacer una función que al iniciar el programa revise el almacenamiento por si hay algo de antes
+
+const checkStorage = () => {
+    const savedData = localStorage.getItem(STORAGE_KEY)
+    console.log(savedData)
+
+    if(!savedData){
+        return //null
+    }else{
+        //guardamos en una variable el resultado parseado de la 
+        //información que teníamos en storage
+        const parsedData = JSON.parse(savedData);
+        //hacemos un push del spread de parsedData
+
+                //el spread operator ( ... )
+        PHONEBOOK.push(...parsedData);
+       
+      // updateDOM()
+    } // o if(savedData){
+        //console.log(savedData)
+    //}
+}
+
+//para que se ejecute lo de arriba apenas cargo la pag
+window.onload = () => {
+    checkStorage()
+}
+// o sólo poner checkStorage()
