@@ -102,7 +102,7 @@ function checkIfContactExists(obj) {
         obj.add()
         //guardar en memoria del navegador
         console.log(obj)
-        updateDOM(obj)
+        updateDOM()
 
 
         localStorage.setItem(STORAGE_KEY, JSON.stringify(PHONEBOOK))
@@ -115,11 +115,27 @@ function checkIfContactExists(obj) {
 
 //editar esta función para que nos sirva para todo el array
 //actualizar el dom
-function updateDOM(obj) {
-    //la desestructuracion me permite
+function updateDOM() {
+    //iterar sobre PHONEBOOK pasando cada contacto como
+    //parámetro a esta función
+    renewDOM()
+    for (let i = 0; i < PHONEBOOK.length; i++) {
+        createContactDiv(PHONEBOOK[i])
+    }
+
+}
+
+const renewDOM = () => {
+
+    agenda.innerHTML = '  <h2>Contactos</h2>'
+}
+
+
+const createContactDiv = (obj) => {
+    const { name, tel, email } = obj //la desestructuracion me permite
     //guardar el valor de propiedades
     //de un obj en variables del mismo nombre
-    const { name, tel, email } = obj;
+
 
     let newContact = document.createElement('div')
 
@@ -139,7 +155,9 @@ function updateDOM(obj) {
 
 
     agenda.appendChild(newContact)
+
 }
+
 
 
 
@@ -153,22 +171,21 @@ addButton.onclick = (e) => {
 
 const checkStorage = () => {
     const savedData = localStorage.getItem(STORAGE_KEY)
-    console.log(savedData)
 
-    if(!savedData){
+
+    if (!savedData) {
         return //null
-    }else{
+    } else {
         //guardamos en una variable el resultado parseado de la 
         //información que teníamos en storage
         const parsedData = JSON.parse(savedData);
         //hacemos un push del spread de parsedData
 
-                //el spread operator ( ... )
+        //el spread operator ( ... )
         PHONEBOOK.push(...parsedData);
-       
-      // updateDOM()
+        updateDOM()
     } // o if(savedData){
-        //console.log(savedData)
+    //console.log(savedData)
     //}
 }
 
