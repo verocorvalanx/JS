@@ -129,7 +129,7 @@ function updateDOM() {
 PHONEBOOK.forEach( (contacto)=>{
 createContactDiv(contacto)
 } )
-
+}
 const renewDOM = () => {
 
     agenda.innerHTML = '  <h2>Contactos</h2>'
