@@ -119,11 +119,16 @@ function updateDOM() {
     //iterar sobre PHONEBOOK pasando cada contacto como
     //parámetro a esta función
     renewDOM()
-    for (let i = 0; i < PHONEBOOK.length; i++) {
+ /*   for (let i = 0; i < PHONEBOOK.length; i++) {
         createContactDiv(PHONEBOOK[i])
     }
 
-}
+} mejor con foreach:
+*/
+
+PHONEBOOK.forEach( (contacto)=>{
+createContactDiv(contacto)
+} )
 
 const renewDOM = () => {
 
