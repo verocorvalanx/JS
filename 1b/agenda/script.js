@@ -206,9 +206,6 @@ const editContact = (e) => {
 }
 
 
-
-
-
 function askNewData() {
     const newName = prompt('Nuevo nombre')
 
@@ -224,16 +221,25 @@ function askNewData() {
 
 }
 
-const deleteContact = (e) => { }
-//recibir mail
-const selectedMail = e.target.previousSibling.textContent;
-alert(selectedMail)
-//encontrar el item del array con ese mail y eliminarlo
-//actualizar el array
-//actualizar el storage
-//actualizar el dom
+const deleteContact = (e) => {
+    //recibir mail
+    const selectedMail = e.target.previousSibling.textContent;
+
+    //encontrar el item del array con ese mail 
+    const selectedContact = PHONEBOOK.find((contacto) => contacto.email === selectedMail)
+    //y eliminarlo
+    //actualizar el array
+    const selectedIndex = PHONEBOOK.indexOf(selectedContact)
+    PHONEBOOK.splice(selectedIndex, 1)
 
 
+    //actualizar el storage
+    //actualizar el dom
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(PHONEBOOK))
+    updateDOM()
+
+}
 addButton.onclick = (e) => {
     createContact(e);
 
