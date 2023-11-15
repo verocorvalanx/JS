@@ -35,8 +35,6 @@ function toast(txt, type) {
 
 
 
-
-
 class Contact {
     constructor(name, tel, email) {
         this.name = name
@@ -48,8 +46,8 @@ class Contact {
     }
 }
 
-//así phonebook tiene los métod
-//os de array:
+//así phonebook tiene los métodos
+// de array:
 const PHONEBOOK = [];
 
 const STORAGE_KEY = 'PHONEBOOK';
