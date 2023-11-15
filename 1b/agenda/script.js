@@ -103,8 +103,6 @@ function checkIfContactExists(obj) {
         //guardar en memoria del navegador
         console.log(obj)
         updateDOM()
-
-
         localStorage.setItem(STORAGE_KEY, JSON.stringify(PHONEBOOK))
 
         toast(`Añadí a ${obj.name}`)
@@ -119,16 +117,16 @@ function updateDOM() {
     //iterar sobre PHONEBOOK pasando cada contacto como
     //parámetro a esta función
     renewDOM()
- /*   for (let i = 0; i < PHONEBOOK.length; i++) {
-        createContactDiv(PHONEBOOK[i])
-    }
+    /*   for (let i = 0; i < PHONEBOOK.length; i++) {
+           createContactDiv(PHONEBOOK[i])
+       }
+   
+   } mejor con foreach:
+   */
 
-} mejor con foreach:
-*/
-
-PHONEBOOK.forEach( (contacto)=>{
-createContactDiv(contacto)
-} )
+    PHONEBOOK.forEach((contacto) => {
+        createContactDiv(contacto)
+    })
 }
 const renewDOM = () => {
 
@@ -153,9 +151,25 @@ const createContactDiv = (obj) => {
     const mailNode = document.createElement('span')
     mailNode.textContent = email;
 
+    const editBtn = document.createElement('button')
+    editBtn.setAttribute('class', 'edit-btn')
+    editBtn.textContent = 'Editar'
+    const deleteBtn = document.createElement('button')
+    deleteBtn.setAttribute('class', 'delete-btn')
+    deleteBtn.textContent = 'Borrar'
+
+
+    //llamar a la función para editar contacto
+    editBtn.addEventListener('click', editContact)
+
+    //llamar a la función para borrar contacto
+    deleteBtn.addEventListener('click', deleteContact)
+
 
     newContact.appendChild(nameNode)
+    newContact.appendChild(editBtn)
     newContact.appendChild(mailNode)
+    newContact.appendChild(deleteBtn)
     newContact.appendChild(telNode)
 
 
@@ -163,7 +177,61 @@ const createContactDiv = (obj) => {
 
 }
 
+const editContact = (e) => {
 
+    const { nextSibling } = e.target
+    //recibir mail
+    const selectedMail = nextSibling.textContent
+    //tomar los nuevos datos (prompt)
+    const { newName, newEmail, newTel } = askNewData()
+
+    console.log(newName, newEmail, newTel)
+
+    //encontrar el item del array con ese mail para guardar los datos
+    const selectedContact = PHONEBOOK.find(person => person.email === selectedMail)
+    //encontrar el índice del contacto para editarlo (el del array)
+    const selectedIndex = PHONEBOOK.indexOf(selectedContact)
+
+
+    PHONEBOOK[selectedIndex].name = newName.trim() ? newName : selectedContact.name
+    PHONEBOOK[selectedIndex].email = newEmail.trim() ? newEmail : selectedContact.email
+    PHONEBOOK[selectedIndex].tel = newTel.trim() ? newTel : selectedContact.tel
+
+    //actualizar el storage
+    //actualizar el dom
+
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(PHONEBOOK))
+    updateDOM()
+}
+
+
+
+
+
+function askNewData() {
+    const newName = prompt('Nuevo nombre')
+
+    const newEmail = prompt('Nuevo email')
+
+    const newTel = prompt('Nuevo teléfono')
+
+    return {
+        newName: newName,
+        newEmail: newEmail,
+        newTel: newTel,
+    }
+
+}
+
+const deleteContact = (e) => { }
+//recibir mail
+const selectedMail = e.target.previousSibling.textContent;
+alert(selectedMail)
+//encontrar el item del array con ese mail y eliminarlo
+//actualizar el array
+//actualizar el storage
+//actualizar el dom
 
 
 addButton.onclick = (e) => {

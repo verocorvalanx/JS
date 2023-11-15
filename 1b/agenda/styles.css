@@ -1,11 +1,43 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+   
+    margin: 3%;
+}
 
+header{
+display: flex;
+flex-direction: column;
+font-size: larger;
+align-items: center;
+}
+
+footer{
+    display: flex;
+    
+    
+}
+
+
+
+main{
+    margin-top: 3%;
+    margin-bottom: 3%;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 40% 60%;
+   
+}
 
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 3px solid salmon;
-    width: 35%;
+    width: 90%;
     margin-inline: auto;
     gap: 1rem;
     padding: 3rem 0;
@@ -24,9 +56,10 @@ form button {
 .agenda {
     border: 3px solid salmon;
     margin: 1rem auto;
-    width: 55%;
+    width: 80%;
     min-width: 500px;
 }
+
 
 .contacto {
     border: 3px solid rgb(223, 182, 87);
@@ -44,4 +77,13 @@ form button {
     text-align: center;
     font-size: 1rem;
     white-space: nowrap;
+}
+
+.contacto>button{
+    display: none;
+    cursor: pointer;
+}
+
+.contacto:hover>button{
+    display: block;
 }
