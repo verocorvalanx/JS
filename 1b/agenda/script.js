@@ -227,19 +227,24 @@ const deleteContact = (e) => {
 
     //encontrar el item del array con ese mail 
     const selectedContact = PHONEBOOK.find((contacto) => contacto.email === selectedMail)
-    //y eliminarlo
-    //actualizar el array
-    const selectedIndex = PHONEBOOK.indexOf(selectedContact)
-    PHONEBOOK.splice(selectedIndex, 1)
+    const confirmation = confirm(`¿Estás seguro que quieres borrar a ${selectedContact.name} de tus contactos?`)
+    if (confirmation) {
+        //y eliminarlo
+        //actualizar el array
+        const selectedIndex = PHONEBOOK.indexOf(selectedContact)
+        PHONEBOOK.splice(selectedIndex, 1)
 
 
-    //actualizar el storage
-    //actualizar el dom
+        //actualizar el storage
+        //actualizar el dom
 
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(PHONEBOOK))
-    updateDOM()
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(PHONEBOOK))
+        updateDOM()
+
+    }
 
 }
+
 addButton.onclick = (e) => {
     createContact(e);
 
