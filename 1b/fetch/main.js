@@ -8,7 +8,10 @@ const body = document.querySelector('body')
 const fetchData = () => {
     return fetch(url)
         .then((res) => res.json())
-        .then((data) => CHARACTERS.push(...data.results))
+        .then((data) => {
+            CHARACTERS.push(...data.results)
+            document.querySelector('button').style.display = 'none'
+        })
         .catch((err) => { console.error('Hubo un error: ' + err) })
         .finally(console.log('Fetching terminado'))
 
