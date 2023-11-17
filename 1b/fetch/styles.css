@@ -25,6 +25,17 @@ body {
 }
 
 .card>img {
-    width: 80%;
+    width: 50%;
     height: auto;
+}
+
+
+button{
+    padding: 1rem;
+    background-color: rgb(182, 225, 38);
+    font-weight: bolder;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 15px;
 }
